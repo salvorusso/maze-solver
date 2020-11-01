@@ -1,0 +1,12 @@
+{
+  "name": "maze-solver",
+  "version": "1.0.0",
+  "description": "Maze puzzle solver",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "author": "salvor",
+  "license": "MIT"
+}
