@@ -23,11 +23,12 @@ function collect ( roomId ) {
     else
         collected = 'None'
 
-    console.log( roomId + "  " + currentRoom.name + "  " + collected)
+    console.log( roomId + "\t" + currentRoom.name + "\t" + collected)
 
 }
 
 function solveMaze () {
-    console.log("ID  Room  Object")
+    console.log("\nID\tRoom\t\tObject Collected")
+    console.log("----------------------------------------")
     collect(startId)
 }
