@@ -1,4 +1,5 @@
 import commandLineArgs from 'command-line-args'
+import fileReader from './utils/fileReader.js'
 
 //Read command line args
 const argsDefinitions = [
