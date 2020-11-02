@@ -5,7 +5,43 @@ const args = commandLineArgs.readCommandLineArgs()
 const map = fileReader.readJson(args.map)
 const startId = args.start_room
 const toCollect = args.objects_to_collect
+const seen = []
 solveMaze()
+
+/**
+ * 
+ * @param {*} currentRoom
+ * Continue the search in the maze 
+ */
+function walk ( currentRoom ) {
+    //console.log("currentRoom:",currentRoom)
+    const index = map.rooms.indexOf(currentRoom)
+
+    let nextRoom = ""
+    if ( currentRoom.north){
+        nextRoom = currentRoom.north
+        delete map.rooms[index].north
+        collect(nextRoom)
+    }
+
+    if ( currentRoom.south){
+        nextRoom = currentRoom.south
+        delete map.rooms[index].south
+        collect(nextRoom)
+    }
+
+    if ( currentRoom.west){
+        nextRoom = currentRoom.west
+        delete map.rooms[index].west
+        collect(nextRoom)
+    }
+
+    if ( currentRoom.east){
+        nextRoom = currentRoom.east
+        delete map.rooms[index].east
+        collect(nextRoom)
+    }
+}
 
 /**
  * @param {Number} roomId 
@@ -18,13 +54,20 @@ function collect ( roomId ) {
     if ( currentRoom.objects.length > 0 ){
         currentRoom.objects.forEach(obj => {
             collected.push(obj.name)
+            const index = toCollect.indexOf(obj.name)
+            if (index > -1)
+                toCollect.splice(index, 1)
         });
     }
     else
         collected = 'None'
 
-    console.log( roomId + "\t" + currentRoom.name + "\t" + collected)
-
+    console.log( roomId + "\t" + currentRoom.name + "\t\t" + collected)
+    seen.push(roomId)
+    if ( toCollect.length > 0)
+        walk(currentRoom)
+    else
+        console.log("Finish")
 }
 
 function solveMaze () {
