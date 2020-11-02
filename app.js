@@ -66,8 +66,11 @@ function collect ( roomId ) {
     seen.push(roomId)
     if ( toCollect.length > 0)
         walk(currentRoom)
-    else
-        console.log("Finish")
+    else{
+        console.log("All objects Collected")
+        process.exit(0)
+    }
+        
 }
 
 function solveMaze () {
