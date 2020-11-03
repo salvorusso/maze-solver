@@ -1,11 +1,12 @@
 import commandLineArgs from './utils/argsReader.js'
 import fileReader from './utils/fileReader.js'
+import search from './algorithm/search.js'
 
 const args = commandLineArgs.readCommandLineArgs()
 const map = fileReader.readJson(args.map)
 const startId = args.start_room
 const toCollect = args.objects_to_collect
-const seen = []
+let seen = {}
 solveMaze()
 
 /**
@@ -14,33 +15,19 @@ solveMaze()
  * Continue the search in the maze 
  */
 function walk ( currentRoom ) {
-    //console.log("currentRoom:",currentRoom)
-    const index = map.rooms.indexOf(currentRoom)
 
-    let nextRoom = ""
-    if ( currentRoom.north){
-        nextRoom = currentRoom.north
-        delete map.rooms[index].north
-        collect(nextRoom)
-    }
+    const neighbours = search.getNeighbours(currentRoom)
+    
+    if (!seen[currentRoom.id])
+        seen[currentRoom.id] = []
 
-    if ( currentRoom.south){
-        nextRoom = currentRoom.south
-        delete map.rooms[index].south
-        collect(nextRoom)
-    }
-
-    if ( currentRoom.west){
-        nextRoom = currentRoom.west
-        delete map.rooms[index].west
-        collect(nextRoom)
-    }
-
-    if ( currentRoom.east){
-        nextRoom = currentRoom.east
-        delete map.rooms[index].east
-        collect(nextRoom)
-    }
+    neighbours.forEach( room => {
+        if ( !search.alreadyVisited(seen, room, currentRoom.id) )
+        {
+            seen[currentRoom.id].push(room)
+            collect(room)
+        }
+    });
 }
 
 /**
@@ -63,7 +50,6 @@ function collect ( roomId ) {
         collected = 'None'
 
     console.log( roomId + "\t" + currentRoom.name + "\t\t" + collected)
-    seen.push(roomId)
     if ( toCollect.length > 0)
         walk(currentRoom)
     else{
