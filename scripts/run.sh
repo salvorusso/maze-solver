@@ -1,4 +1,12 @@
 #!/bin/bash
+function usage {
+        echo "usage:"
+        echo "run.sh -m [file path] -s [start room] -o [objects to collect]"
+        echo ""
+        echo "Example:"
+        echo "run.sh -m ./map/map.json -s 2 -o Knife PottedPlant"
+        echo ""
+}
 
 map=$2
 start=$4
@@ -8,7 +16,6 @@ objects=()
 while [ $i -le $j ]  
 do
     current=$6
-    echo "Object - $i: $current";
     objects+=(" $current") 
     i=$((i + 1));
     shift 1;
