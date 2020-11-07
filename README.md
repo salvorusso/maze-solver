@@ -11,4 +11,4 @@ Local Usage:
 
 Using Docker:
 
-` docker run -v $(pwd):/mnt maze-solver ./scripts/run.sh`
+` docker run -v $(pwd):/mnt maze-solver:1.0.0 ./scripts/run.sh -m ./map/map.json -s 2 -o Knife PottedPlant`
