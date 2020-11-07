@@ -1,6 +1,6 @@
 import commandLineArgs from './utils/argsReader.js'
 import fileReader from './utils/fileReader.js'
-import search from './algorithm/search.js'
+import algorithm from './algorithm/search.js'
 
 const args = commandLineArgs.readCommandLineArgs()
 const map = fileReader.readJson(args.map)
@@ -16,13 +16,13 @@ solveMaze()
  */
 function walk ( currentRoom ) {
 
-    const neighbours = search.getNeighbours(currentRoom)
+    const neighbours = algorithm.getNeighbours(currentRoom)
     
     if (!seen[currentRoom.id])
         seen[currentRoom.id] = []
 
     neighbours.forEach( room => {
-        if ( !search.alreadyVisited(seen, room, currentRoom.id) )
+        if ( !algorithm.alreadyVisited(seen, room, currentRoom.id) )
         {
             seen[currentRoom.id].push(room)
             collect(room)
