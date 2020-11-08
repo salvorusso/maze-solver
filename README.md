@@ -16,3 +16,13 @@ Local Usage:
 Using Docker:
 
 ` docker run -v $(pwd):/mnt maze-solver:1.0.0 ./scripts/run.sh -m ./map/map.json -s 2 -o Knife PottedPlant`
+
+Output Sample:
+```
+ID      Room            Object Collected                                                                                                                                ----------------------------------------                                                                                                                                
+2       Dining Room             None                                                                                                                                    
+1       Hallway                 None                                                                                                                                            
+2       Dining Room             None                                                                                                                                    
+3       Kitchen                 Knife                                                                                                                                           
+2       Dining Room             None                                                                                                                                    
+4       Sun Room                PottedPlant                                                                                                                             All objects Collected ```
